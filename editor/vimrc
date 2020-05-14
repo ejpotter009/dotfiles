@@ -1,0 +1,42 @@
+set nocompatible
+set lines=50 columns=100
+let mapleader = ","
+set ruler
+set showcmd
+set backup
+set autoindent
+set wildchar=<Tab> wildmenu wildmode=full
+"syntax on (executed by plug.vim below)
+set shortmess+=I
+set number
+set relativenumber
+set laststatus=2
+set backspace=indent,eol,start
+set ignorecase
+set smartcase
+set incsearch
+set nocp
+"filetype plugin indent on (executed by plug.vim below)
+set tabstop=2				" tabstop and shiftwidth must match
+set softtabstop=2
+set shiftwidth=2			" values from 2 to 8 work well
+set expandtab
+set textwidth=80
+colorscheme dracula
+set grepprg=grep\ -nH\ $*
+nnoremap <leader>ev :tabnew $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+set guifont=Hack\ 13
+
+" The following plugin management requires the installation of junegunn/plug.vim
+" in the autoload folder.  For now I have chosen not to automate this in my
+" .vimrc
+"""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/managed_plugs')
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+Plug 'davidhalter/jedi-vim'
+Plug 'ervandew/supertab'
+call plug#end()
