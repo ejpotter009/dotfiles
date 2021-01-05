@@ -21,8 +21,6 @@ set tabstop=2				" tabstop and shiftwidth must match
 set softtabstop=2
 set shiftwidth=2			" values from 2 to 8 work well
 set expandtab
-set textwidth=80
-colorscheme dracula
 set grepprg=grep\ -nH\ $*
 nnoremap <leader>ev :tabnew $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -33,6 +31,7 @@ set guifont=Hack\ 13
 " .vimrc
 """""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/managed_plugs')
+Plug 'dracula/vim',{'as':'dracula'}
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -40,3 +39,4 @@ Plug 'tpope/vim-commentary'
 Plug 'davidhalter/jedi-vim'
 Plug 'ervandew/supertab'
 call plug#end()
+colorscheme dracula
