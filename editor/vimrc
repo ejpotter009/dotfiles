@@ -1,5 +1,6 @@
 set nocompatible
-set lines=50 columns=100
+set encoding=utf-8
+set lines=50 columns=90
 let mapleader = ","
 set ruler
 set showcmd
@@ -21,11 +22,23 @@ set tabstop=2				" tabstop and shiftwidth must match
 set softtabstop=2
 set shiftwidth=2			" values from 2 to 8 work well
 set expandtab
+set foldmethod=indent
+set foldlevel=99
 set grepprg=grep\ -nH\ $*
+set splitbelow
+set splitright
 nnoremap <leader>ev :tabnew $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <space> za
 set guifont=Hack\ 13
 
+"""""""""""
+" Config for YCM Plugin
+"""""""""""
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"""""""""""""""""""""""""""""""""""
 " The following plugin management requires the installation of junegunn/plug.vim
 " in the autoload folder.  For now I have chosen not to automate this in my
 " .vimrc
@@ -36,7 +49,40 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
-Plug 'davidhalter/jedi-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-vinegar'
+Plug 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
 Plug 'ervandew/supertab'
+"Plug 'davidhalter/jedi-vim'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'ycm-core/YouCompleteMe'
+Plug 'tmhedberg/SimpylFold'
+Plug 'Konfekt/FastFold'
+"Plug 'jmcantrell/vim-virtualenv'
+" Python syntax checking 
+Plug 'vim-syntastic/syntastic' 
+Plug 'nvie/vim-flake8'
+" Synchronize tmux/vim pane/split key commands
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'vimoutliner/vimoutliner'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 colorscheme dracula
+
+"""""""""""""""
+"" Virtual Env and misc support for Python
+"""""""""""""""
+py3 << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  with open(activate_this) as pyenv:
+    exec(pyenv.read(), dict(__file__=activate_this))
+EOF
+
+nnoremap <leader>r :!python3 %<cr>
+let python_highlight_all=1
+syntax on
